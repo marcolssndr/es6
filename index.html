@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <title>ES6 Modules</title>
+</head>
+
+<body>
+    <script type="module">
+        // Importo una funzione all'interno di un modulo ES6 esterno
+        import {callAdd, callSub, callMul, callDiv, addItem, removeItem, addImage, trovaFilm} from "./js/main-module.js";
+
+        // Per rendere accessibile la funzione importata (callAdd) al di fuori del modulo (module scope)
+        // occorre renderla globale (Global) assegnandola all'oggetto window.
+        window.callAdd=callAdd;
+        window.callSub=callSub;
+        window.callMul=callMul;
+        window.callDiv=callDiv;
+        window.addItem=addItem;
+        window.removeItem=removeItem;
+        window.addImage=addImage;
+        window.trovaFilm=trovaFilm;
+    </script>
+    <script>
+        /*
+        Funzione collegata all'evento onClick
+        */
+        function calcolasomma() {
+            // Per recuperare i due valori rispettivamente nelle INPUT "a" e "b" accedo al DOM
+            // con uno dei metodi disponibili (in questo caso getElementById). I tag INPUT hanno la proprietà
+            // "value" che contiene il valore digitato dall'utente.
+            const a=document.getElementById('a').value;
+            const b=document.getElementById('b').value;
+
+            // Chiamo la funzione "callAdd" importata dal modulo e intercetto il suo risultato.
+            const result=window.callAdd(a,b);
+
+            // Inserisco dinamicamente il valore all'interno del DOM.
+            // Cerco con il metodo getElementById il tag SPAN che dovrà visualizzare il risultato attraverso il suo ID.
+            // Ogni tag del DOM ha una proprietà "innerHTML" che mi permette di includere dinamicamente all'interno 
+            // dell'HTML dei valori via Javascript (nel nostro caso il valore della variabile "result")
+            if(isNaN(result)){
+                document.getElementById('valore').innerHTML="Errore, devi inserire valori numerici";  
+            }
+            else{
+            document.getElementById('valore').innerHTML=result;
+            }
+        }
+        function calcolasottrazione() {
+            // Per recuperare i due valori rispettivamente nelle INPUT "a" e "b" accedo al DOM
+            // con uno dei metodi disponibili (in questo caso getElementById). I tag INPUT hanno la proprietà
+            // "value" che contiene il valore digitato dall'utente.
+            const a=document.getElementById('a').value;
+            const b=document.getElementById('b').value;
+
+            // Chiamo la funzione "callAdd" importata dal modulo e intercetto il suo risultato.
+            const result=window.callSub(a,b);
+
+            // Inserisco dinamicamente il valore all'interno del DOM.
+            // Cerco con il metodo getElementById il tag SPAN che dovrà visualizzare il risultato attraverso il suo ID.
+            // Ogni tag del DOM ha una proprietà "innerHTML" che mi permette di includere dinamicamente all'interno 
+            // dell'HTML dei valori via Javascript (nel nostro caso il valore della variabile "result")
+            if(isNaN(result)){
+                document.getElementById('valore').innerHTML="Errore, devi inserire valori numerici";  
+            }
+            else{
+            document.getElementById('valore').innerHTML=result;
+            }
+        }
+        function calcolamoltiplicazione() {
+            // Per recuperare i due valori rispettivamente nelle INPUT "a" e "b" accedo al DOM
+            // con uno dei metodi disponibili (in questo caso getElementById). I tag INPUT hanno la proprietà
+            // "value" che contiene il valore digitato dall'utente.
+            const a=document.getElementById('a').value;
+            const b=document.getElementById('b').value;
+
+            // Chiamo la funzione "callAdd" importata dal modulo e intercetto il suo risultato.
+            const result=window.callMul(a,b);
+
+            // Inserisco dinamicamente il valore all'interno del DOM.
+            // Cerco con il metodo getElementById il tag SPAN che dovrà visualizzare il risultato attraverso il suo ID.
+            // Ogni tag del DOM ha una proprietà "innerHTML" che mi permette di includere dinamicamente all'interno 
+            // dell'HTML dei valori via Javascript (nel nostro caso il valore della variabile "result")
+            if(isNaN(result)){
+                document.getElementById('valore').innerHTML="Errore, devi inserire valori numerici";  
+            }
+            else{
+            document.getElementById('valore').innerHTML=result;
+            }
+        }
+        function calcoladivisione() {
+            // Per recuperare i due valori rispettivamente nelle INPUT "a" e "b" accedo al DOM
+            // con uno dei metodi disponibili (in questo caso getElementById). I tag INPUT hanno la proprietà
+            // "value" che contiene il valore digitato dall'utente.
+            const a=document.getElementById('a').value;
+            const b=document.getElementById('b').value;
+
+            // Chiamo la funzione "callAdd" importata dal modulo e intercetto il suo risultato.
+            const result=window.callDiv(a,b);
+
+            // Inserisco dinamicamente il valore all'interno del DOM.
+            // Cerco con il metodo getElementById il tag SPAN che dovrà visualizzare il risultato attraverso il suo ID.
+            // Ogni tag del DOM ha una proprietà "innerHTML" che mi permette di includere dinamicamente all'interno 
+            // dell'HTML dei valori via Javascript (nel nostro caso il valore della variabile "result")
+            if(isNaN(result)){
+                document.getElementById('valore').innerHTML="Errore, devi inserire valori numerici";  
+            }
+            else{
+            document.getElementById('valore').innerHTML=result;
+            }
+        }
+
+        const addUlLI = () => window.addItem();
+        const removeUlLI = () => window.removeItem();
+        const addImg = () => window.addImage();
+        const trovaFilm = () => window.trovaFilm();
+        
+    </script>
+
+    <div class="container">
+        <h1>Utility</h1>
+        <div class="mb-3">
+            <label for="a" class="form-label">Primo valore</label>
+            <input id="a" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="b" class="form-label">Secondo valore</label>
+            <input id="b" class="form-control">
+        </div>
+        <button onclick="calcolasomma()" class="btn btn-primary mb-3">Somma</button>
+        <button onclick="calcolasottrazione()" class="btn btn-primary mb-3">Sottrazione</button>
+        <button onclick="calcolamoltiplicazione()" class="btn btn-primary mb-3">Moltiplicazione</button>
+        <button onclick="calcoladivisione()" class="btn btn-primary mb-3">Divisione</button>
+        <button onclick="window.addItem()" class="btn btn-primary mb-3">Aggiungi Elementi</button>
+        <button onclick="window.removeItem()" class="btn btn-primary mb-3">Rimuovi Elementi</button>
+        <button onclick="window.addImage()" class="btn btn-primary mb-3">Aggiungi Immagine</button>
+        <button onclick="window.trovaFilm()" class="btn btn-primary mb-3">Film</button>
+        <div class="alert alert-success" role="alert">
+            Risultato: <span id="valore" style="font-weight: bold;"></span>
+        </div>
+        <ul id="myList">
+
+        </ul>
+        <div id="myimage-container">
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
